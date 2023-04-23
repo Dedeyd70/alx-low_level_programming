@@ -14,12 +14,17 @@ int main(void)
 	{
 		for (u = 49; u <= 57; u++)
 		{
-			if (r != u && u > r)
+			if (u > r)
 			{
-			putchar(r);
-			putchar(u);
-			putchar(',');
-			putchar(' ');
+				putchar(r);
+				putchar(u);
+				{
+					if ((r != 56) || (u != 57))
+					{
+						putchar(',');
+						putchar(' ');
+					}
+				}
 			}
 		}
 	}
