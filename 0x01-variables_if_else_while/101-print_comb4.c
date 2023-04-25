@@ -18,17 +18,14 @@ int main(void)
 			{
 				if (g > f && g > e)
 				{
-
-				putchar(e);
-				putchar(f);
-				putchar(g);
-				{
-					if ((e != 55) || (f != 56))
+					putchar(e);
+					putchar(f);
+					putchar(g);
+					if (e != 55 || f != 56 || g != 57)
 					{
-					putchar(',');
-					putchar(' ');
+						putchar(',');
+						putchar(' ');
 					}
-				}
 				}
 			}
 		}
