@@ -1,7 +1,7 @@
 #include <stdio.h>
 
 /**
- * main - Combination of 3 digits
+ * main - printing combination of numbers
  *
  * Return: always 0 (Success)
  *
@@ -16,12 +16,12 @@ int main(void)
 		{
 			for (g = 50; g < 58; g++)
 			{
-				if (g > f && g > e)
+				if (g > f && f > e)
 				{
 					putchar(e);
 					putchar(f);
 					putchar(g);
-					if (e != 55 || f != 56 || g != 57)
+					if (e != 55 || f != 56)
 					{
 						putchar(',');
 						putchar(' ');
