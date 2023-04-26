@@ -1,14 +1,14 @@
 #include "main.h"
 
 /**
- * printing lower cases times 10
+ * print_alphabet_x10 - Printing lower cases times 10
  *
  * Return: 0 always (Success)
  */
 void print_alphabet_x10(void)
 {
-	int k;
-	int l;
+	char k;
+	char l;
 
 	for (k = 0; k < 10; k++)
 	{
