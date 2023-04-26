@@ -10,7 +10,7 @@ void times_table(void)
 
 	for (m = 0; m < 10; m++)
 	{
-		for (n = 0; n < 0; n++)
+		for (n = 0; n < 10; n++)
 		{
 			o = n * m;
 			if (n == 0)
@@ -32,6 +32,7 @@ void times_table(void)
 				_putchar((o % 10) + '0');
 			}
 		}
+		_putchar('\n');
 	}
 
 }
