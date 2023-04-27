@@ -7,7 +7,7 @@
  */
 void print_triangle(int size)
 {
-	int row, hashes, spaces;
+	int z, d, c;
 
 	if (size <= 0)
 	{
@@ -15,13 +15,13 @@ void print_triangle(int size)
 	}
 	else
 	{
-		for (row = 1; row <= size; row++)
+		for (z = 1; z <= size; z++)
 		{
-			for (spaces = size - row; spaces >= 1; spaces--)
+			for (c = size - z; c >= 1; c--)
 			{
 				_putchar(' ');
 			}
-			for (hashes = 1; hashes <= row; hashes++)
+			for (d = 1; d <= z; d++)
 			{
 				_putchar ('#');
 			}
