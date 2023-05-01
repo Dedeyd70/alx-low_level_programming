@@ -1,20 +1,20 @@
 #include <stdio.h>
 
 /**
- *  main - Printing Fibonchi
+ *  main - Printing Fiboncci starting from 1 and 2
  *  Return: always 0 (Success)
  */
 int main(void)
 {
-	int d = 1, f = 2, dee;
+	long int d = 1, f = 2, dee;
 	int k;
 
-	printf("%d, %d", d, f);
+	printf("%ld, %ld",d, f);
 
-	for (k = 2; k <= 50; k++)
+	for (k = 3; k <= 50; k++)
 	{
 		dee = d + f;
-		printf(", %d", dee);
+		printf(", %ld", dee);
 		d = f;
 		f = dee;
 	}
