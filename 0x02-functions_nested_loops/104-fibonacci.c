@@ -13,7 +13,7 @@ int main(void)
 	for (int e = 3; e <= 98; e++)
 	{
 		int dee = d + f;
-		printf("%d", dee);
+		printf(",%d", dee);
 		if (e !=98)
 		{
 			printf(",");
