@@ -1,24 +1,26 @@
 #include <stdio.h>
 
 /**
- * main - Printing the first 98 fibonacci numbers
- * Return: always 0 (Success)
+ * main - generating the fibonacci sequence, by starting with 1 and 2
+ * Return: always 0(Success)
  */
 int main(void)
 {
-	int d = 1, f = 2, dee;
-	int k;
+	int sum = 0;
+	int d = 1, f = 2;
+	int dee;
 
-	printf("%d, %d", d, f);
-
-	for (k = 3; k <= 98; k++)
+	while (f <= 4000000)
 	{
-		dee = d + f;
-		printf(", %d", dee);
-		d = f;
-		f = dee;
+		if (f % 2 == 0)
+		{
+			sum += f;
+		}
+		dee = f;
+		f += d;
+		d = dee;
 	}
 
-	printf("\n");
+	printf("%d\n", sum);
 	return (0);
 }
