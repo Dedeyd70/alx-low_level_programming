@@ -9,7 +9,7 @@ int main(void)
 	long int d = 1, f = 2, dee;
 	int k;
 
-	printf("%ld, %ld",d, f);
+	printf("%ld, %ld", d, f);
 
 	for (k = 3; k <= 50; k++)
 	{
