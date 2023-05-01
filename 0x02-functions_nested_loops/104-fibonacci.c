@@ -6,19 +6,21 @@
  */
 int main(void)
 {
-	int e, d = 1, f = 2, dee;
+	int d = 1, f = 2;
 
 	printf("%d, %d", d, f);
 
-	for (e = 3; e <= 98; e++)
+	for (int e = 3; e <= 98; e++)
 	{
-		dee = d + f;
-		printf("%d, ", dee);
+		int dee = d + f;
+		printf("%d", dee);
+		if (e !=98)
+		{
+			printf(",");
+		}
 		d = f;
 		f = dee;
 	}
-
-
 	printf("\n");
 	return (0);
 }
