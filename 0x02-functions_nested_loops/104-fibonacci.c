@@ -6,7 +6,7 @@
  */
 int main(void)
 {
-	int d = 1, f = 2, c, dee = 2;
+	int d = 1, f = 2, c, dee;
 
 	printf("%d, %d, ", d, f);
 
