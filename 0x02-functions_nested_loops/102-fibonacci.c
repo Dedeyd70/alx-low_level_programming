@@ -11,7 +11,7 @@ int main(void)
 
 	printf("%d, %d", d, f);
 
-	for (k = 3; k <= 50; k++)
+	for (k = 2; k <= 50; k++)
 	{
 		dee = d + f;
 		printf(", %d", dee);
