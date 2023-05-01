@@ -6,15 +6,15 @@
  */
 int main(void)
 {
-	long long d = 1, f = 2, dee;
+	int d = 1, f = 2, dee;
 	int k;
 
-	printf("%lld, %lld", d, f);
+	printf("%d, %d", d, f);
 
 	for (k = 3; k <= 50; k++)
 	{
 		dee = d + f;
-		printf(", %lld", dee);
+		printf(", %d", dee);
 		d = f;
 		f = dee;
 	}
