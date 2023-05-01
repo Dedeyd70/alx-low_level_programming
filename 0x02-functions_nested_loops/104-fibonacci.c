@@ -10,7 +10,7 @@ int main(void)
 
 	printf("%d, %d, ", d, f);
 
-	while (dee < 98)
+	while (dee <= 98)
 	{
 		c = d + f;
 		printf("%d, ", c);
