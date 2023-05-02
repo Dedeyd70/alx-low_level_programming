@@ -13,12 +13,13 @@ void puts_half(char *str)
 	{
 		dee++;
 	}
-	if (dee % 2 == 0)
+	if (dee % 2 == 1)
 	{
-		s = dee / 2;
-	} else
+		s = (dee + 1) / 2;
+	}
+	else
 	{
-		s = (dee - 1) / 2;
+		s = (dee / 2);
 	}
 	for (e = s; e < dee; e++)
 	{
