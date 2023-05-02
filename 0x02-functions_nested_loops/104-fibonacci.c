@@ -7,21 +7,21 @@
  */
 int main(void)
 {
-	uint64_t d = 1, f = 2, dee;
+	uint32_t d = 1, f = 2, dee;
 	int e;
 
-	printf("%lu, %lu", d, f);
+	printf("%u, %u", d, f);
 
-	for (e = 0; e < 96; e++)
+	for (e = 1; e <= 97; e++)
 	{
 		dee = d + f;
-		printf(", %lu", dee);
+		printf(", %u", dee);
 		d = f;
 		f = dee;
 	}
 
 
-	printf("%lu\n", d + f);
+	printf("%u\n", d + f);
 
 	return (0);
 }
