@@ -7,12 +7,12 @@
  */
 int main(void)
 {
-       uint32_t	d = 1, f = 2, dee;
+	uint32_t d = 1, f = 2, dee;
 	int e;
 
 	printf("%u, %u", d, f);
 
-	for (e = 3; e <= 97; e++)
+	for (e = 3; e <= 98; e++)
 	{
 		dee = d + f;
 		printf(", %u", dee);
