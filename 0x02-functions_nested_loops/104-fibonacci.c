@@ -11,7 +11,7 @@ int main(void)
 
 	printf("%d, %d", d, f);
 
-	for (e = 3; e <= 98; e++)
+	for (e = 3; e <= 97; e++)
 	{
 		dee = d + f;
 		printf(", %u", dee);
