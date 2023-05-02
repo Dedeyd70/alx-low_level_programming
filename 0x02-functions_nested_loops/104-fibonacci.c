@@ -12,7 +12,7 @@ int main(void)
 
 	printf("%u, %u", d, f);
 
-	for (e = 1; e <= 97; e++)
+	for (e = 1; e < 97; e++)
 	{
 		dee = d + f;
 		printf(", %u", dee);
