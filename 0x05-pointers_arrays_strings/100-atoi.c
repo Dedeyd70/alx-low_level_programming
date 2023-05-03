@@ -7,11 +7,16 @@
  */
 int _atoi(char *s)
 {
-	unsigned int dee = 0;
+	int dee = 0;
+	int sin = 1;
 
 	while (*s != '\0')
 	{
-		if (*s >= '0' && *s <= '9')
+		if (*s == '-')
+		{
+			sin *= -1;
+		}
+		else if (*s >= '0' && *s <= '9')
 		{
 			dee = dee * 10 + (*s - '0');
 		}
@@ -21,5 +26,5 @@ int _atoi(char *s)
 		}
 		s++;
 	}
-	return (dee);
+	return (dee * sin);
 }
