@@ -5,6 +5,7 @@
  * @n: char to be used
  * Return: if n is greater than 15 or less than 0 print nothing
  */
+
 void print_times_table(int n)
 {
 	int d, f, pro;
