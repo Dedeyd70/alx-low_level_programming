@@ -7,23 +7,16 @@
  */
 int main(void)
 {
+	int sum;
+	char c;
+
 	srand(time(NULL));
-
-	int password[7];
-	int d, sum = 0;
-
-	for (d = 0; d < 6; d++)
+	while (sum <= 2645)
 	{
-		password[d] = rand() % 10 + '0';
-		sum += password[d];
+		c = rand() % 128;
+		sum += c;
+		putchar(c);
 	}
-
-	password[6] = (sum % 10) + '0';
-
-	for (d = 0; d < 7; d++)
-	{
-		putchar(password[d]);
-	}
-
+	putchar(2772 - sum);
 	return (0);
 }
