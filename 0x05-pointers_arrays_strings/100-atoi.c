@@ -8,23 +8,23 @@
  */
 int _atoi(char *s)
 {
-	int dee = 0;
-	int sin = 1;
-
+        int dee = 0;
+        int sin = 1;
+	int dig;
+	int overf = 0;
 	while (*s != '\0')
 	{
 		if (*s == '-')
 		{
 			sin *= -1;
 		}
-		else if (*s >= '0' && *s <= '9')
+		if (*s >= '0' && *s <= '9')
 		{
-			if (dee >= INT_MAX / 10 && (*s - '0') > INT_MAX % 10)
-				return (INT_MAX);
-			if (dee <= INT_MIN / 10 && (*s - '0') < INT_MIN % 10)
-				return (INT_MIN);
+			dig = *s - '0';
+			if (dee > INT_MAX / 10 || ((dee == INT_MAX / 10))
+				overf = 1;
 
-			dee = dee * 10 + (*s - '0');
+			dee = dee * 10 + dig;
 		}
 		else if (dee > 0)
 		{

@@ -9,37 +9,42 @@ void print_times_table(int n)
 {
 	int d, f, pro;
 
-	if (n < 0 || n > 15)
+	if ((n >= 0) && (n <= 14))
 	{
-		return;
-	}
-	for (d = 0; d <= n; d++)
-	{
-		for (f = n; f <= n; f++)
+		for (d = 0; d <= n; d++)
 		{
-			pro = d * f;
-			if (pro <= 9)
+			for (f = n; f <= n; f++)
 			{
-				_putchar(pro = '0');
-				_putchar(' ');
-				_putchar(' ');
-				_putchar(' ');
+				pro = d * f;
+				if (pro > 99)
+				{
+					_putchar(',');
+					_putchar(32);
+					_putchar((pro / 100));
+					_putchar(((pro / 10) % 10) + '0');
+					_putchar((pro % 10) + '0');
+				}
+				else if (pro > 9)
+				{
+					_putchar(',');
+					_putchar(32);
+					_putchar(32);
+					_putchar(((pro / 10) % 10) + '0');
+					_putchar((pro % 10) + '0');
+				}
+				else
+				{
+					if (f != 0)
+					{
+						_putchar(',');
+						_putchar(32);
+						_putchar(32);
+						_putchar(32);
+					}
+					_putchar(pro + '0');
+				}		
 			}
-			else if (pro <= 99)
-			{
-				_putchar((pro / 10) + '0');
-				_putchar((pro % 10) + '0');
-				_putchar(' ');
-				_putchar(' ');
-			}
-			else
-			{
-				_putchar((pro / 100) + '0');
-				_putchar(((pro / 10) % 10) + '0');
-				_putchar((pro % 10) + '0');
-				_putchar(' ');
-			}
+			_putchar('\n');
 		}
-		_putchar('\n');
 	}
 }
