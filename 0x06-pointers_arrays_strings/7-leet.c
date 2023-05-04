@@ -2,25 +2,28 @@
 
 /**
  * leet - Encoding a string into 1337
- * @n: string to encode
+ * @s: string to encode
  * Return: pointer to the encoded string
  */
-char *leet(char *n)
+char *leet(char *s)
 {
-	int dee = 0;
-	int jay = 0;
-	char d[] = "aAeEo0tTlL";
-	char j[] = "4433007711";
+	char leet_table[256] = {0};
+	char *leet_chars = "aAeEo0tTlL";
+	char *leet_nums = "4433007711";
+	int dee;
 
-	for (dee = 0; n[dee] != '\0'; dee++)
+	for (dee = 0; leet_chars[dee] != '\0'; dee++)
 	{
-		for (jay = 0; jay < 10; jay++)
+		leet_table[(int) leet_chars[dee]] = leet_nums[dee];
+	}
+
+	for (dee = 0; s[dee] != '\0'; dee++)
+	{
+
+		if (leet_table[(int) s[dee]] != 0)
 		{
-			if (n[dee] == d[jay])
-			{
-				n[dee] = j[jay];
-			}
+			s[dee] = leet_table[(int) s[dee]];
 		}
 	}
-	return (n);
+	return (s);
 }
