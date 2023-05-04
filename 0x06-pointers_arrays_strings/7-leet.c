@@ -1,4 +1,5 @@
 #include "main.h"
+#include <ctype.h>
 
 /**
  * leet - Encoding a string into 1337
@@ -20,7 +21,7 @@ char *leet(char *s)
 	for (dee = 0; s[dee] != '\0'; dee++)
 	{
 
-		if (leet_table[(int) s[dee]] != 0)
+		if (isascii(s[dee]) && leet_table[(int) s[dee]] != 0)
 		{
 			s[dee] = leet_table[(int) s[dee]];
 		}
