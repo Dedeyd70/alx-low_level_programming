@@ -7,7 +7,8 @@
  */
 char *leet(char *n)
 {
-	int dee, jay;
+	int dee = 0;
+	int jay = 0;
 	char d[] = "aAeEo0tTlL";
 	char j[] = "4433007711";
 
@@ -15,9 +16,9 @@ char *leet(char *n)
 	{
 		for (jay = 0; jay < 10; jay++)
 		{
-			if (n[dee] == d[jay])
+			if (*(dee + n) == *(jay + d))
 			{
-				n[dee] = j[jay];
+				*(n + dee) = *(j + jay);
 			}
 		}
 	}
