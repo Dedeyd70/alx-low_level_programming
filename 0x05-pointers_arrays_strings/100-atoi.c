@@ -11,7 +11,6 @@ int _atoi(char *s)
         int dee = 0;
         int sin = 1;
 	int dig;
-	int overf = 0;
 	while (*s != '\0')
 	{
 		if (*s == '-')
@@ -21,8 +20,7 @@ int _atoi(char *s)
 		if (*s >= '0' && *s <= '9')
 		{
 			dig = *s - '0';
-			if (dee > INT_MAX / 10 || ((dee == INT_MAX / 10))
-				overf = 1;
+			if (dee > INT_MAX / 10 || ((dee == INT_MAX / 10)))
 
 			dee = dee * 10 + dig;
 		}
