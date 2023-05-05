@@ -1,7 +1,7 @@
 #include "main.h"
 
 /**
- * leet - changing vowels to numbers
+ * leet - encoding strings
  * @s: string to be used
  * Return: s
  */
