@@ -8,27 +8,16 @@
  */
 int _atoi(char *s)
 {
-        int dee = 0;
-        int sin = 1;
-	int dig;
-	while (*s != '\0')
-	{
-		if (*s == '-')
-		{
-			sin *= -1;
-		}
-		if (*s >= '0' && *s <= '9')
-		{
-			dig = *s - '0';
-			if (dee > INT_MAX / 10 || ((dee == INT_MAX / 10)))
+	unsigned int d = 0;
+	int j = 1;
 
-			dee = dee * 10 + dig;
-		}
-		else if (dee > 0)
-		{
+	do {
+		if (*s == '-')
+			j *= -1;
+		else if (*s >= 48 && *s <= 57)
+			d = (d * 10) + (*s - 48);
+		else if (d > 0)
 			break;
-		}
-		s++;
-	}
-	return (dee * sin);
+	} while (*s++);
+	return (d * j);
 }
