@@ -1,6 +1,6 @@
 #include "main.h"
 #include <stdio.h>
-#include <string.h>
+
 /**
  * infinite_add - Adding two numbers
  * @r: is the input value
@@ -11,30 +11,44 @@
  */
 char *infinite_add(char *n1, char *n2, char *r, int size_r)
 {
-	int len1 = strlen(n1);
-	int len2 = strlen(n2);
-	int dee = 0;
-	int j, m;
-	int sum;
+	int d1 = 0, d2 = 0, dee, jay, mar, ner, sum = 0;
 
-	if (len1 + 1 > size_r || len2 + 1 > size_r)
+	while (*(n1 + d1) != '\0')
+		d1++;
+	while (*(n2 + d2) != '\0')
+		d2++;
+	if (d1 >= d2)
+		jay = d1;
+	else
+		jay = d2;
+	if (size_r <= jay + 1)
 		return (0);
-	for (j = len1 - 1, m = len2 - 1; j >= 0 || m >= 0 || dee; j--, m--)
+	r[jay + 1] = '\0';
+	d1--, d2--, size_r--;
+	mar = *(n1 + d1) - 48, ner = *(n2 + d2) - 48;
+	while (jay >= 0)
 	{
-		sum = dee;
-		if (j >= 0)
-			sum += n1[j] - '0';
-		if (m >= 0)
-			sum += n2[m] - '0';
-		dee = sum / 10;
-		r[len1 + len2 -j - m -1] = sum % 10 + '0';
+		dee = mar + ner + sum;
+		if (dee >= 10)
+			sum = dee / 10;
+		else
+			sum = 0;
+		if (dee > 0)
+		*(r + jay) = (dee % 10) + 48;
+		else
+			*(r + jay) = '0';
+		if (d1 >= 0)
+			d1--, mar = *(n1 + d1) - 48;
+		else
+			mar = 0;
+		if (d2 > 0)
+			d2--, ner = *(n2 + d2) - 48;
+		else
+			ner = 0;
+		jay--, size_r--;
 	}
-	for (j = 0, m = strlen(r) - 1; j < m; j++, m--)
-	{
-		char tmp = r[j];
-
-		r[j] = r[m];
-		r[m] = tmp;
-	}
-	return (r);
+	if (*(r) == '0')
+		return (r + 1);
+	else
+		return (r);
 }
