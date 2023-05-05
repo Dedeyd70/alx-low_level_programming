@@ -2,26 +2,26 @@
 
 /**
  * leet - encoding strings
- * @s: string to be used
- * Return: s
+ * @n: string to be used
+ * Return: n
  */
-char *leet(char *s)
+char *leet(char *n)
 {
 	int d;
 	int j;
 	char s1[] = "aAeEo0tTlL";
 	char s2[] = "4433007711";
 
-	for (d = 0; s[d] != '\0'; d++)
+	for (d = 0; n[d] != '\0'; d++)
 	{
 		for (j = 0; j <= 9; j++)
 		{
-			if (s[d] == s1[j])
+			if (n[d] == s1[j])
 			{
-				s[d] = s2[j];
+				n[d] = s2[j];
 				break;
 			}
 		}
 	}
-	return (s);
+	return (n);
 }
