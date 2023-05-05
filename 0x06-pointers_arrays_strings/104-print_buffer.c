@@ -24,21 +24,26 @@ void print_buffer(char *b, int size)
 		for (c = 0; c < 10; c++)
 		{
 			if (c < u)
-				printf("%02x", *(b + a + c));
-			else
-				printf(" ");
-			if (c % 2)
 			{
-				printf(" ");
+				printf("%02x", *(b + a + c));
+				if (c % 2)
+				{
+					printf(" ");
+				}
+			}
+			else
+			{
+				printf("  ");
 			}
 		}
 		for (c = 0; c < u; c++)
 		{
 			int d = *(b + a + c);
-				if (d < 32 || c > 132)
-				{
-					d = '.';
-				}
+
+			if (d < 32 || c > 126)
+			{
+				d = '.';
+			}
 			printf("%c", d);
 		}
 		printf("\n");
