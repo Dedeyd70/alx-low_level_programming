@@ -3,23 +3,26 @@
 /**
  * rot13 - encoding strings with rot13
  * @r: the string
- * Return: the encoded string
+ * Return: value of r
  */
 char *rot13(char *r)
 {
-	char *start = r;
+	int e = 0;
+	char lw[] = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+	char up[] = "nopqrstuvwxyzabcdefghijklmNOPQRSTUVWXYZABCDEFGHIJKLM";
+	char *d = r;
 
 	while (*r)
 	{
-		if ((*r >= 97 && *r <= 109) || (*r >= 65 && *r <= 77))
+		for (e = 0; e <= 52; e++)
 		{
-			*r += 13;
+			if (*r == lw[e])
+			{
+				*r = up[e];
+				break;
+			}
 		}
-		else if ((*r >= 110 && *r <= 122) || (*r >= 78 && *r <= 90))
-		{
-			*r -= 13;
-		}
-		++r;
+		r++;
 	}
-	return (start);
+	return (d);
 }
