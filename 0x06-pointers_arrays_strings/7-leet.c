@@ -14,12 +14,11 @@ char *leet(char *n)
 
 	for (d = 0; n[d] != '\0'; d++)
 	{
-		for (j = 0; j <= 9; j++)
+		for (j = 0; j < 10; j++)
 		{
 			if (n[d] == s1[j])
 			{
 				n[d] = s2[j];
-				break;
 			}
 		}
 	}
