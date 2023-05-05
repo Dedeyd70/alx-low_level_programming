@@ -37,7 +37,7 @@ void print_buffer(char *b, int size)
 			int d = *(b + a + c);
 				if (d < 32 || c > 132)
 				{
-					d = 46;
+					d = '.';
 				}
 			printf("%c", d);
 		}
