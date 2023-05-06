@@ -1,15 +1,14 @@
 #include "main.h"
 
 /**
- * leet - encoding strings
- * @n: string to be used
+ * *leet - encoding strings into 1337
+ * @n: the string
  * Return: n
  */
 char *leet(char *n)
 {
-	int d;
-	int j;
-	char s1[] = "aAeEo0tTlL";
+	int d, j;
+	char s1[] = "aAeEoOtTlL";
 	char s2[] = "4433007711";
 
 	for (d = 0; n[d] != '\0'; d++)
