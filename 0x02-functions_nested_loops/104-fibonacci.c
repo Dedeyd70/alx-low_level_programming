@@ -1,5 +1,4 @@
 #include <stdio.h>
-#include <stdint.h>
 
 /**
  * main - Printing the first 98 fibonacci numbers
@@ -7,21 +6,37 @@
  */
 int main(void)
 {
-	uint64_t d = 1, f = 2, dee;
-	int e;
+	unsigned long int lui;
+	unsigned long int f = 1000000000;
+	unsigned long int fb = 1;
+	unsigned long int fbn = 2;
+	unsigned long int fb1;
+	unsigned long int fb2;
+	unsigned long int fbn1;
+	unsigned long int fbn2;
 
-	printf("%lu, %lu", d, f);
+	printf("%lu", fb);
 
-	for (e = 1; e < 99; e++)
+	for (lui = 1; lui < 91; lui++)
 	{
-		dee = d + f;
-		printf(", %lu", dee);
-		d = f;
-		f = dee;
+		printf(", %lu", fbn);
+		fbn += fb;
+		fb = fbn - fb;
 	}
+	fb1 = (fb / f);
+	fb2 = (fb % f);
+	fbn1 = (fbn / f);
+	fbn2 = (fbn % f);
 
-
-	printf("%lu\n", d + f);
-
+	for (lui = 92; lui < 99; ++lui)
+	{
+		printf(", %lu", fbn1 + (fbn2 / f));
+		printf("%lu", fbn2 % f);
+		fbn1 = fbn1 + fb1;
+		fb1 = fbn1 - fb1;
+		fbn2 = fbn2 + fb2;
+		fb2 = fbn2 - fb2;
+	}
+	printf("\n");
 	return (0);
 }
