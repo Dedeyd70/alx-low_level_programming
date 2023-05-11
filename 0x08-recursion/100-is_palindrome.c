@@ -1,13 +1,14 @@
 #include "main.h"
+#include <string.h>
 
 /**
- * is_palindrome - Finding if a string is a palindrome
- * @s: chr to be used
- * @d: start
- * @e: end
- * Return: 1 if string is palindrome or 0 if not
+ * check_palindrome - Finding if a string is a palindorme
+ * @s: the string
+ * @d: num to be used
+ * @e: num to be used
+ * Return: length
  */
-int is_palindrome_helper(char *s, int d, int e)
+int check_palindrome(char *s, int d, int e)
 {
 	if (d >= e)
 	{
@@ -17,15 +18,21 @@ int is_palindrome_helper(char *s, int d, int e)
 	{
 		return (0);
 	}
-	return (is_palindrome(s, d + 1, e - 1));
+	return (check_palindrome(s, d + 1, e - 1));
 }
 
 /**
- * is_palindrome - Finding if a string is a palindrome
- * @s: the string
+ * is_palindrome - Find id a string is a palindrome
+ * @s: the string to be used
  * Return: 1 if string is palindrome or 0 if not
  */
 int is_palindrome(char *s)
 {
-	int 
+	int ln = strlen(s);
+
+	if (ln == 0)
+	{
+		return (1);
+	}
+	return (check_palindrome(s, 0, ln - 1));
 }
