@@ -21,6 +21,6 @@ int main(int argc, char *argv[])
 	jay = atoi(argv[2]);
 	r = d * jay;
 
-	printf("%d\n", r);
+	printf("%i\n", r);
 	return (0);
 }
