@@ -9,18 +9,18 @@
  */
 void *_calloc(unsigned int nmemb, unsigned int size)
 {
-	unsigned int j, e;
+	unsigned int j;
 	char *dee;
 
 	if (nmemb <= 0 || size <= 0)
 		return (NULL);
 
-	e = nmemb * size;
-	dee =  malloc(e);
+	dee = malloc(nmemb * size);
 
 	if (dee == NULL)
 		return (NULL);
-	while (j < e)
+	j = 0;
+	while (j < nmemb * size)
 	{
 		*(j + dee) = 0;
 		j++;
