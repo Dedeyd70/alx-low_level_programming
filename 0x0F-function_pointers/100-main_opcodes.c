@@ -24,11 +24,12 @@ int main(int argc, char *argv[])
 		printf("Error\n");
 		exit(2);
 	}
-	unsigned char *p = (unsigned char *)main;
+	unsigned char *p = (unsigned char *)&main;
 
 	for (; d < num; d++)
 	{
 		printf("%.2x", p[d]);
+		if (d < num - 1)
 		printf(" ");
 	}
 	printf("\n");
