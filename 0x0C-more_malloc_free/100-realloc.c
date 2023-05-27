@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-	
+
 /**
  * _realloc - Alloocating a memory block
  * @ptr: The pointer
@@ -12,29 +12,29 @@
  */
 void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size)
 {
-        char *p;
+	char *p;
 
-        if (new_size == old_size)
-                return (ptr);
-        if (ptr == NULL)
-        {
-                p = malloc(new_size);
-                if (p == 0)
-                        return (NULL);
-                free(ptr);
-                return (p);
-        }
-        if (new_size == 0 && ptr != NULL)
-        {
-                free(ptr);
-                return (NULL);
-        }
-        p = malloc(new_size);
-        if (p == 0)
-                return (NULL);
-        memcpy(p, ptr, old_size);
-        free(ptr);
-        return (p);
+	if (new_size == old_size)
+		return (ptr);
+	if (ptr == NULL)
+	{
+		p = malloc(new_size);
+		if (p == 0)
+			return (NULL);
+		free(ptr);
+		return (p);
+	}
+	if (new_size == 0 && ptr != NULL)
+	{
+		free(ptr);
+		return (NULL);
+	}
+	p = malloc(new_size);
+	if (p == 0)
+		return (NULL);
+	memcpy(p, ptr, old_size);
+	free(ptr);
+	return (p);
 }
 
 /**
