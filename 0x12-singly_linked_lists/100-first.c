@@ -1,5 +1,7 @@
 #include <stdio.h>
 
+void printMsg(void);
+
 /**
  * printMsg - printing a function before the main
  *
