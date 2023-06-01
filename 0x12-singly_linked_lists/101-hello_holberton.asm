@@ -1,5 +1,5 @@
 section .data
-format db "hello, Holberton", 0
+format db "Hello, Holberton", 0
 newline db 10, 0
 
 section .text
