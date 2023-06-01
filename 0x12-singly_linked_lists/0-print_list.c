@@ -21,8 +21,8 @@ size_t print_list(const list_t *h)
 		{
 			printf("[0] (nill)\n");
 		}
-		sum++;
 		h = h->next;
+		sum++;
 	}
 	return (sum);
 }
