@@ -9,9 +9,8 @@
  */
 size_t print_list(const list_t *h)
 {
-	size_t sum;
+	size_t sum = 0;
 
-	sum = 0;
 	while (h != NULL)
 	{
 		if (h->str == NULL)
