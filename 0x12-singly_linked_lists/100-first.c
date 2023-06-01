@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-void printMsg(void);
+void printMsg(void)__attribute__((constructor));
 
 /**
  * printMsg - printing a function before the main
