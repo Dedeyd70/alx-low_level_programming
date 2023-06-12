@@ -33,7 +33,8 @@ int open_files(const char *src_path, const char *dest_path,
 		handle_error("Cant't read from file");
 		exit(98);
 	}
-	*write_fd = open(dest_path, O_WRONLY | O_CREAT | O_TRUNC, S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP | S_IROTH);
+	*write_fd = open(dest_path, O_WRONLY | O_CREAT | O_TRUNC,
+			S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP | S_IROTH);
 	if (*write_fd  == -1)
 	{
 		close(*read_fd);
