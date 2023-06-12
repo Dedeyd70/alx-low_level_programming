@@ -30,16 +30,15 @@ int open_files(const char *src_path, const char *dest_path,
 	*read_fd = open(src_path, O_RDONLY);
 	if (*read_fd == -1)
 	{
-		handle_error("Can't read from file");
-		return (0);
+		handle_error("Cant't read from file");
+		exit(98);
 	}
-	*write_fd = open(dest_path, O_WRONLY | O_CREAT | O_TRUNC,
-			S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP | S_IROTH);
+	*write_fd = open(dest_path, O_WRONLY | O_CREAT | O_TRUNC, S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP | S_IROTH);
 	if (*write_fd  == -1)
 	{
 		close(*read_fd);
 		handle_error("Can't write to file");
-		return (0);
+		exit(99);
 	}
 	return (1);
 }
@@ -61,18 +60,18 @@ int copy_file(int read_fd, int write_fd)
 
 		if (bytes_written == -1)
 		{
+			handle_error("Can't write to file");
 			close(read_fd);
 			close(write_fd);
-			handle_error("Can't write to file");
-			return (0);
+			exit(99);
 		}
 	}
 	if (bytes_read == -1)
 	{
+		handle_error("Cant read from file");
 		close(read_fd);
 		close(write_fd);
-		handle_error("Cant read from file");
-		return (0);
+		exit(98);
 	}
 	return (1);
 }
@@ -88,8 +87,8 @@ int close_files(int read_fd, int write_fd)
 {
 	if (close(read_fd) == -1 || close(write_fd) == -1)
 	{
-		handle_error("Can't close file");
-		return (0);
+		handle_error("Can't close file descriptor");
+		exit(100);
 	}
 	return (1);
 }
@@ -107,15 +106,21 @@ int main(int argc, char *argv[])
 
 	if (argc != 3)
 	{
-		handle_error("Usage: cp file_from file_to");
+		dprintf(STDERR_FILENO, "Usage: cp file_from file_to\n");
 		exit(97);
 	}
 
 	if (!open_files(argv[1], argv[2], &read_fd, &write_fd))
+	{
 		exit(98);
+	}
 	if (!copy_file(read_fd, write_fd))
-		exit(99);
+	{
+		exit(98);
+	}
 	if (!close_files(read_fd, write_fd))
+	{
 		exit(100);
+	}
 	return (0);
 }
