@@ -1,126 +1,85 @@
 #include "main.h"
 
-void handle_error(const char *message);
-int open_files(const char *src_path, const char *dest_path,
-		int *read_fd, int *write_fd);
-int copy_file(int read_fd, int write_fd);
-int close_files(int read_fd, int write_fd);
+void print_error(const char *message);
+void copy_file(const char *file_from, const char *file_to);
 
 
 /**
- * handle_error - Prints an error message to stderr
+ * print_error - Prints an error message to stderr
  * @message: The error message to print
  */
-void handle_error(const char *message)
+void print_error(const char *message)
 {
 	dprintf(STDERR_FILENO, "Error: %s\n", message);
-}
-
-/**
- * open_files - opens the source and destination files
- * @src_path: Path to the source file
- * @dest_path: Path ro the destination file
- * @read_fd: pointer to the variable to store the souce fd
- * @write_fd: pointer to the variable to store the destination fd
- * Return: 1 on success, 0 on failure
- */
-int open_files(const char *src_path, const char *dest_path,
-		int *read_fd, int *write_fd)
-{
-	*read_fd = open(src_path, O_RDONLY);
-	if (*read_fd == -1)
-	{
-		handle_error("Cant't read from file");
-		return (0);
-	}
-	*write_fd = open(dest_path, O_WRONLY | O_CREAT | O_TRUNC, 0664);
-	if (*write_fd  == -1)
-	{
-		close(*read_fd);
-		handle_error("Can't write to file");
-		return (0);
-	}
-	return (1);
+	exit(1);
 }
 
 /**
  * copy_file - Copies the content of a file to another file
- * @read_fd: source file descriptor
- * @write_fd: destination file descriptor
- * Return: 1 on success, 0 on failure
+ * @file_from: The path of the source file
+ * @file_to: The path of the destination
  */
-int copy_file(int read_fd, int write_fd)
+void copy_file(const char *file_from, const char *file_to)
 {
+	struct stat src_stat;
+
+	int fd_from, fd_to;
 	ssize_t bytes_read, bytes_written;
 	char buffer[1024];
 
-	while ((bytes_read = read(read_fd, buffer, sizeof(buffer))) > 0)
-	{
-		bytes_written = write(write_fd, buffer, bytes_read);
+	fd_from = open(file_from, O_RDONLY);
+	if (fd_from == -1)
+		print_error("Can't read from file");
 
-		if (bytes_written == -1)
+	fd_to = open(file_to, O_WRONLY | O_CREAT | O_TRUNC, 0664);
+	if (fd_to == -1)
+	{
+		close(fd_from);
+		print_error("Can't write to file");
+	}
+
+	while ((bytes_read = read(fd_from, buffer, sizeof(buffer))) > 0)
+	{
+		bytes_written = write(fd_to, buffer, bytes_read);
+
+		if (bytes_written == -1 || bytes_written != bytes_read)
 		{
-			handle_error("Can't write to file");
-			close(read_fd);
-			close(write_fd);
-			return (0);
+			close(fd_from);
+			close(fd_to);
+			print_error("Can't write to file");
 		}
 	}
 	if (bytes_read == -1)
 	{
-		handle_error("Cant read from file");
-		close(read_fd);
-		close(write_fd);
-		return (0);
+		close(fd_from);
+		close(fd_to);
+		print_error("Can't read fron file");
 	}
-	return (1);
+	if (close(fd_from) == -1 || close(fd_to) == -1)
+		print_error("Can't close file descriptor");
+	
+	if (stat(file_from, &src_stat) == -1)
+		print_error("Can't get source file metadata");
+	
+	if (chown(file_to, src_stat.st_uid, src_stat.st_gid) == -1)
+		print_error("Can't change ownership of destination file");
+	if (chmod(file_to, src_stat.st_mode) == -1)
+		print_error("Can't change permissions of destination file");
 }
-
-
-/**
- * close_files - Closes the source and destination files
- * @read_fd: source file descriptor
- * @write_fd: destination descriptor
- * Return: 1 0n success, 0 on failure
- */
-int close_files(int read_fd, int write_fd)
-{
-	if (close(read_fd) == -1 || close(write_fd) == -1)
-	{
-		handle_error("Can't close file descriptor");
-		return (0);
-	}
-	return (1);
-}
-
 
 /**
  * main - Copies the content of a file to another file
  * @argc: The argument count
  * @argv: The argument vector
- * Return: 0 on success, or exit with error codes
+ * Return: 0 on success, 97 if the number of arguments is incorrect
  */
 int main(int argc, char *argv[])
 {
-	int read_fd, write_fd;
-
 	if (argc != 3)
 	{
 		dprintf(STDERR_FILENO, "Usage: cp file_from file_to\n");
 		exit(97);
 	}
-
-	if (!open_files(argv[1], argv[2], &read_fd, &write_fd))
-	{
-		exit(98);
-	}
-	if (!copy_file(read_fd, write_fd))
-	{
-		exit(99);
-	}
-	if (!close_files(read_fd, write_fd))
-	{
-		exit(100);
-	}
+	copy_file(argv[1], argv[2]);
 	return (0);
 }
