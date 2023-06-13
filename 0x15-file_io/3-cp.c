@@ -1,85 +1,78 @@
 #include "main.h"
 
-void print_error(const char *message);
-void copy_file(const char *file_from, const char *file_to);
-
-
-/**
- * print_error - Prints an error message to stderr
- * @message: The error message to print
- */
-void print_error(const char *message)
-{
-	dprintf(STDERR_FILENO, "Error: %s\n", message);
-	exit(1);
-}
+void print_err_with_fd(char *msg, char *opt, int status, int fd1);
+void print_error(char *msg, char *opt, int status);
 
 /**
- * copy_file - Copies the content of a file to another file
- * @file_from: The path of the source file
- * @file_to: The path of the destination
+ * main - Copies the contents of a file to another
+ * @argc: The number of arguments
+ * @argv: The argument
+ * Return: 0
  */
-void copy_file(const char *file_from, const char *file_to)
+int main(int argc, char **argv)
 {
-	struct stat src_stat;
-
-	int fd_from, fd_to;
-	ssize_t bytes_read, bytes_written;
+	int fd_from, fd_to, n_read, n_write;
 	char buffer[1024];
 
-	fd_from = open(file_from, O_RDONLY);
+	if (argc != 3)
+		print_error("Usage: cp file_from file_to", "", 97);
+	fd_from = open(argv[1], O_RDONLY);
+
 	if (fd_from == -1)
-		print_error("Can't read from file");
+		print_error("Error: Can't read from file", argv[1], 98);
+	fd_to = open(argv[2], O_WRONLY | O_CREAT | O_TRUNC, 0664);
 
-	fd_to = open(file_to, O_WRONLY | O_CREAT | O_TRUNC, 0664);
 	if (fd_to == -1)
+		print_err_with_fd("Error: Can't write to ", argv[2], 99, fd_from);
+
+	n_read = read(fd_from, buffer, 1024);
+
+	while (n_read > 0)
 	{
-		close(fd_from);
-		print_error("Can't write to file");
+		n_write = write(fd_to, buffer, n_read);
+		if (n_read != n_write)
+			print_err_with_fd("Error: Can't write to ", argv[2], 99, fd_from);
+
+		n_read = read(fd_from, buffer, 1024);
 	}
 
-	while ((bytes_read = read(fd_from, buffer, sizeof(buffer))) > 0)
-	{
-		bytes_written = write(fd_to, buffer, bytes_read);
+	if (n_read == -1)
+		print_error("Error: Can't read from file ", argv[1], 98);
+	n_read = close(fd_from);
 
-		if (bytes_written == -1 || bytes_written != bytes_read)
-		{
-			close(fd_from);
-			close(fd_to);
-			print_error("Can't write to file");
-		}
-	}
-	if (bytes_read == -1)
-	{
-		close(fd_from);
-		close(fd_to);
-		print_error("Can't read fron file");
-	}
-	if (close(fd_from) == -1 || close(fd_to) == -1)
-		print_error("Can't close file descriptor");
-	
-	if (stat(file_from, &src_stat) == -1)
-		print_error("Can't get source file metadata");
-	
-	if (chown(file_to, src_stat.st_uid, src_stat.st_gid) == -1)
-		print_error("Can't change ownership of destination file");
-	if (chmod(file_to, src_stat.st_mode) == -1)
-		print_error("Can't change permissions of destination file");
+	if (n_read < 0)
+		dprintf(STDERR_FILENO, "Error: Can't close fd %d\n", fd_from), exit(100);
+
+	n_write = close(fd_to);
+
+	if (n_write < 0)
+		dprintf(STDERR_FILENO, "Error Can't close fd %d\n", fd_to), exit(100);
+
+	return (0);
 }
 
 /**
- * main - Copies the content of a file to another file
- * @argc: The argument count
- * @argv: The argument vector
- * Return: 0 on success, 97 if the number of arguments is incorrect
+ * print_error - Print the error and close the file descriptor
+ * @msg: Error msg to show
+ * @opt: optional arguments
+ * @status: exit status code
  */
-int main(int argc, char *argv[])
+void print_error(char *msg, char *opt, int status)
 {
-	if (argc != 3)
-	{
-		dprintf(STDERR_FILENO, "Usage: cp file_from file_to\n");
-		exit(97);
-	}
-	copy_file(argv[1], argv[2]);
-	return (0);
+	dprintf(STDERR_FILENO, "%s%s\n", msg, opt);
+	exit(status);
+}
+
+/**
+ * print_err_with_fd - Print the error and close the file descriptor
+ * @msg: Error msg to show
+ * @opt: optional arguments
+ * @status: exit status code
+ * @fd1: file descriptor
+ */
+void print_err_with_fd(char *msg, char *opt, int status, int fd1)
+{
+	if (fd1 > 0)
+		close(fd1);
+	print_error(msg, opt, status);
 }
