@@ -45,7 +45,7 @@ void print_magic(unsigned char *e_ident)
 
 	printf("  Magic:   ");
 
-	for(d = 0; d < EI_NIDENT; d++)
+	for (d = 0; d < EI_NIDENT; d++)
 	{
 		printf("%02x", e_ident[d]);
 		if (d == EI_NIDENT - 1)
@@ -80,7 +80,7 @@ void print_class(unsigned char *e_ident)
 }
 
 /**
- * print _data - prints the data of an ELF header
+ * print_data - prints the data of an ELF header
  * @e_ident: a pointer to an array containing the ELF class
  */
 void print_data(unsigned char *e_ident)
@@ -106,7 +106,7 @@ void print_data(unsigned char *e_ident)
 /**
  * print_version - prints the version of an ELF header
  * @e_ident: a pointer to an array containing the ELF version
- */ 
+ */
 void print_version(unsigned char *e_ident)
 {
 	printf("  Version:                     %d",
@@ -250,7 +250,7 @@ void close_elf(int elf)
  * main - displaying the info contained in the ELF header
  * @argc: the argument count
  * @argv: the argument vector
- * Return 0 on success
+ * Return: 0 on success
  */
 int main(__attribute__((__unused__))int  argc, char *argv[])
 {
@@ -274,7 +274,7 @@ int main(__attribute__((__unused__))int  argc, char *argv[])
 	{
 		free(header);
 		close_elf(d);
-		dprintf(STDERR_FILENO, "Error: `%s`: No such file\n",argv[1]);
+		dprintf(STDERR_FILENO, "Error: `%s`: No such file\n", argv[1]);
 		exit(98);
 	}
 	check_elf(header->e_ident);
