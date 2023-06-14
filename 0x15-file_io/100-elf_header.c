@@ -170,7 +170,7 @@ void print_osabi(unsigned char *e_ident)
 
 /**
  * print_abi - prints the ABI version of an ELf header
- * @e_ident: a pointer to an array containing the ELF ABI version
+ * @e_ident: a pointer to an array 
  */
 void print_abi(unsigned char *e_ident)
 {
