@@ -2,7 +2,7 @@
 
 /**
  * interpolation_search - using the Interpolation search algorithm
- * to search for a value in an array of intergers. 
+ * to search for a value in an array of intergers.
  * @array: is a pointer to the first element
  * @size: is the number of elements in array
  * @value: is the value to search for
